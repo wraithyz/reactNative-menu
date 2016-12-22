@@ -39,3 +39,39 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
   },
 });
+<View tabLabel="Ma" style={{flex:1}}>
+  <DayView
+    dataSource={this.state.dataSource}
+    day={'monday'}
+  />
+</View>
+<View tabLabel="Ti" style={{flex:1}}>
+  <DayView
+    dataSource={this.state.dataSource}
+    day={'tuesday'}
+  />
+</View>
+<View tabLabel="Ke" style={{flex:1}}>
+  <DayView
+    dataSource={this.state.dataSource}
+    day={'wednesday'}
+  />
+</View>
+<View tabLabel="To" style={{flex:1}}>
+  <DayView
+    dataSource={this.state.dataSource}
+    day={'thursday'}
+  />
+</View>
+<View tabLabel="Pe" style={{flex:1}}>
+  <DayView
+    dataSource={this.state.dataSource}
+    day={'friday'}
+  />
+</View>
+<View tabLabel="La" style={{flex:1}}>
+  <DayView
+    dataSource={this.state.dataSource}
+    day={'saturday'}
+  />
+</View>

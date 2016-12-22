@@ -4,6 +4,7 @@ import {
   Text,
   View,
   ListView,
+  ScrollView,
   TouchableHighlight,
   Navigator
 } from 'react-native';
@@ -13,6 +14,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { fetchTayMenu } from '../../actions/tayActions';
 import RestaurantView from '../../components/RestaurantView';
+import DayView from '../../components/DayView';
 
 class Tay extends Component {
   constructor(props) {
@@ -49,38 +51,71 @@ class Tay extends Component {
   }
   renderScene(route, navigator) {
     const today = Math.abs(new Date().getDay() - 1);
+    let menu;
+    if (this.props.tay.fetched) {
+      menu = this.props.tay.menu;
+    }
     return (
       <ScrollableTabView initialPage={today}>
-        <View tabLabel="Ma" style={{flex:1}}>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this.renderRow.bind(this)}
+        <ScrollView tabLabel="Ma">
+          <DayView
+            menu={menu}
+            day={'monday'}
           />
-        </View>
-        <Text tabLabel="Ti">More food</Text>
-        <Text tabLabel="Ke">{this.props.tay.fetched}</Text>
-        <Text tabLabel="To">EVEN more food</Text>
-          <View tabLabel="Pe" style={{flex:1}}>
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={this.renderRow.bind(this)}
-            />
-          </View>
-        <Text tabLabel="La">No more pls</Text>
+        </ScrollView>
+        <ScrollView tabLabel="Ti">
+          <DayView
+            menu={menu}
+            day={'tuesday'}
+          />
+        </ScrollView>
+        <ScrollView tabLabel="Ke">
+          <DayView
+            menu={menu}
+            day={'wednesday'}
+          />
+        </ScrollView>
+        <ScrollView tabLabel="To">
+          <DayView
+            menu={menu}
+            day={'thursday'}
+          />
+        </ScrollView>
+        <ScrollView tabLabel="Pe">
+          <DayView
+            menu={menu}
+            day={'friday'}
+          />
+        </ScrollView>
+        <ScrollView tabLabel="La">
+          <DayView
+            menu={menu}
+            day={'saturday'}
+          />
+        </ScrollView>
       </ScrollableTabView>
     )
   }
 
-  renderRow(data) {
+  renderRow(data, today) {
+    console.log('got called');
+    console.log(data);
     if (data.menu) {
+      console.log(today);
       const today = Math.abs(new Date().getDay() - 1);
-      return (
-        <RestaurantView
-          restaurant={data.restaurant}
-          menu={data.menu}
-          day={today}
-        />
-      )
+      const day = days[today];
+      if (data.menu.day) {
+        console.log(day + ' exists');
+        return (
+          <RestaurantView
+            restaurant={data.restaurant}
+            menu={data.menu.day}
+            day={today}
+          />
+        )
+      } else {
+        console.log(day + ' does not exist');
+      }
     }
     return null;
   }
