@@ -13,7 +13,6 @@ export default class DayView extends Component {
   render() {
     let menu;
     if (this.props.menu) {
-        console.log(`hey man its ${this.props.day}`);
         menu = this.props.menu.map((restaurant, index) =>
           <RestaurantView
             restaurant={restaurant.restaurant}
@@ -23,7 +22,7 @@ export default class DayView extends Component {
         );
     }
     return (
-      <ScrollView>
+      <ScrollView style={styles.dayView}>
         {menu}
       </ScrollView>
     )

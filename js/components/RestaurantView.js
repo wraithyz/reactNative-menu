@@ -16,7 +16,7 @@ export default class RestaurantView extends Component {
           category={category.category}
           courses={category.courses}
           key={index}
-        />
+          />
       );
     }
     return (

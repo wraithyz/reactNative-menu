@@ -10,7 +10,7 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_TTY_MENU_PENDING':
       return { ...state, fetching: true };
     case 'FETCH_TTY_MENU_FULFILLED':
-      return { ...state, fetching: false, fetched: true, menu: JSON.parse(action.payload) };
+      return { ...state, fetching: false, fetched: true, menu: JSON.parse(action.payload.data) };
     case 'FETCH_TTY_MENU_REJECTED':
       return { ...state, fetching: false, error: action.payload };
     default:

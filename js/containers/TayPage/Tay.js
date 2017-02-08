@@ -6,15 +6,18 @@ import {
   ListView,
   ScrollView,
   TouchableHighlight,
-  Navigator
+  Navigator,
+  ToolbarAndroid
 } from 'react-native';
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
 import { connect } from 'react-redux';
 import { fetchTayMenu } from '../../actions/tayActions';
+import { fetchTtyMenu } from '../../actions/ttyActions';
 import RestaurantView from '../../components/RestaurantView';
 import DayView from '../../components/DayView';
+import styles from '../styles/RestaurantPageStyle';
 
 class Tay extends Component {
   constructor(props) {
@@ -28,15 +31,32 @@ class Tay extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchTayMenu();
+    if (this.props.uni)
+    {
+      if (this.props.uni === 'TayPage') {
+        this.props.fetchTayMenu();
+      } else if (this.props.uni === 'TtyPage') {
+        this.props.fetchTtyMenu();
+      }
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.tay.fetched) {
-      if (nextProps.tay !== this.props.tay) {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(nextProps.tay.menu)
-        });
+    if (this.props.uni === 'TayPage') {
+      if (nextProps.tay.fetched) {
+        if (nextProps.tay !== this.props.tay) {
+          this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(nextProps.tay.menu)
+          });
+        }
+      }
+    } else if (this.props.uni === 'TtyPage') {
+      if (nextProps.tty.fetched) {
+        if (nextProps.tty !== this.props.tty) {
+          this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(nextProps.tty.menu)
+          });
+        }
       }
     }
   }
@@ -52,12 +72,27 @@ class Tay extends Component {
   renderScene(route, navigator) {
     const today = Math.abs(new Date().getDay() - 1);
     let menu;
-    if (this.props.tay.fetched) {
-      menu = this.props.tay.menu;
+    if (this.props.uni === 'TayPage') {
+      if (this.props.tay.fetched) {
+        menu = this.props.tay.menu;
+      }
+    } else if (this.props.uni === 'TtyPage') {
+      if (this.props.tty.fetched) {
+        menu = this.props.tty.menu;
+      }
     }
     return (
-      <ScrollableTabView initialPage={today}>
-        <ScrollView tabLabel="Ma">
+      <ScrollableTabView
+        initialPage={today}
+        style={styles.tabContainer}
+        tabBarActiveTextColor={'#FFFFFF'}
+        tabBarInactiveTextColor={'#FFFFFF'}
+        tabBarTextStyle={{opacity: 1}}
+        renderTabBar={()=>
+          <ScrollableTabBar
+            backgroundColor='#2c333b'/>}>
+        <ScrollView
+          tabLabel="Ma">
           <DayView
             menu={menu}
             day={'monday'}
@@ -122,5 +157,6 @@ class Tay extends Component {
 }
 
 export default connect((state) => state, {
-  fetchTayMenu
+  fetchTayMenu,
+  fetchTtyMenu
 })(Tay);
