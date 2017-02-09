@@ -33,30 +33,34 @@ class Tay extends Component {
   componentWillMount() {
     if (this.props.uni)
     {
-      if (this.props.uni === 'TayPage') {
-        this.props.fetchTayMenu();
-      } else if (this.props.uni === 'TtyPage') {
+      if (this.props.uni === 'TayPage' && !this.props.tay.fetched) {
+          this.props.fetchTayMenu();
+      } else if (this.props.uni === 'TtyPage' && !this.props.tty.fetched) {
         this.props.fetchTtyMenu();
       }
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.uni === 'TayPage') {
+    if (nextProps.uni === 'TayPage') {
       if (nextProps.tay.fetched) {
         if (nextProps.tay !== this.props.tay) {
           this.setState({
             dataSource: this.state.dataSource.cloneWithRows(nextProps.tay.menu)
           });
         }
+      } else {
+        this.props.fetchTayMenu();
       }
-    } else if (this.props.uni === 'TtyPage') {
+    } else if (nextProps.uni === 'TtyPage') {
       if (nextProps.tty.fetched) {
         if (nextProps.tty !== this.props.tty) {
           this.setState({
             dataSource: this.state.dataSource.cloneWithRows(nextProps.tty.menu)
           });
         }
+      } else {
+        this.props.fetchTtyMenu();
       }
     }
   }
@@ -133,8 +137,6 @@ class Tay extends Component {
   }
 
   renderRow(data, today) {
-    console.log('got called');
-    console.log(data);
     if (data.menu) {
       console.log(today);
       const today = Math.abs(new Date().getDay() - 1);
