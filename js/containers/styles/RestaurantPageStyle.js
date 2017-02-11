@@ -10,8 +10,6 @@ export default StyleSheet.create({
   settingsToolbar: {
     backgroundColor: '#2c333b',
     height: 56,
-    borderColor: '#FFFFFF',
-    borderBottomWidth: 1,
   },
   settingsList: {
     backgroundColor: '#2c333b',
@@ -29,7 +27,7 @@ export default StyleSheet.create({
   },
   settingHeader: {
     color: '#FFFFFF',
-    paddingLeft: 5,
+    paddingLeft: 8,
     paddingTop: 10,
     borderTopWidth: 1,
     borderColor: 'black'
@@ -38,7 +36,10 @@ export default StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     paddingLeft: 5,
+    paddingTop: 10,
     paddingBottom: 5,
+    borderTopWidth: 1,
+    borderColor: 'white'
   },
   tabContainer: {
     backgroundColor: '#13171a',

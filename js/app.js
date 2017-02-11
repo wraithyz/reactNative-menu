@@ -35,9 +35,9 @@ export default class reactNativeUniFood extends Component {
         });
       }),
       new Promise((resolve) => {
-        AsyncStorage.getItem('@Settings:uni').then((uni) => {
+        AsyncStorage.getItem('@Settings:university').then((uni) => {
           if (uni === null) {
-            AsyncStorage.setItem('@Settings:uni', 'TayPage').then(() => {
+            AsyncStorage.setItem('@Settings:university', 'TayPage').then(() => {
               resolve();
             });
           } else {

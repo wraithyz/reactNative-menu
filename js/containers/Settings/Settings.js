@@ -55,59 +55,26 @@ export default class Settings extends Component {
           <Picker.Item label="Tay" value="TayPage"/>
           <Picker.Item label="TTY" value="TtyPage"/>
         </Picker>
+        <Text
+          style={styles.settingHeader}>
+          Kieli</Text>
         <Picker
           selectedValue={this.state.lang}
           style={styles.settingsPicker}
           onValueChange={(lang) => this.setState({lang: lang})}>
-          <Picker.Item label="Kieli: Suomi" value="fi"/>
-          <Picker.Item label="Language: English" value="eng"/>
+          <Picker.Item label="Suomi" value="fi"/>
+          <Picker.Item label="English" value="eng"/>
         </Picker>
-        <SettingsList
-          backgroundColor= '#2c333b'
-          style={styles.settingsList}>
-          <SettingsList.Header
-            headerText='Yleiset'
-            headerStyle={{color:'white'}}/>
-          <SettingsList.Item
-            title='Yliopisto'
-            titleInfo={this.props.university}
-            backgroundColor='#2c333b'
-            titleStyle={{color:'white'}}
-            arrowStyle={{tintColor:'white'}}>
-            </SettingsList.Item>
-          <SettingsList.Item
-            title='Kieli'
-            titleInfo={this.props.lang}
-            backgroundColor='#2c333b'
-            titleStyle={{color:'white'}}
-            arrowStyle={{tintColor:'white'}}/>
-          <SettingsList.Item
-            title='Teema'
-            titleInfo={this.props.theme}
-            backgroundColor='#2c333b'
-            titleStyle={{color:'white'}}
-            arrowStyle={{tintColor:'white'}}/>
-          <SettingsList.Header
-            headerText='Tietoja'
-            backgroundColor='#2c333b'
-            headerStyle={{color:'white', marginTop:50}}/>
-          <SettingsList.Item
-            title='Tietoja'
-            backgroundColor='#2c333b'
-            titleInfo='Some Information'
-            titleStyle={{color:'white'}}
-            arrowStyle={{tintColor:'white'}}/>
-          <SettingsList.Item
-            title='Settings 1'
-            titleStyle={{color:'white'}}
-            arrowStyle={{tintColor:'white'}}
-            backgroundColor='#2c333b'/>
-          <SettingsList.Item
-            title='Settings 2'
-            titleStyle={{color:'white'}}
-            arrowStyle={{tintColor:'white'}}
-            backgroundColor='#2c333b'/>
-        </SettingsList>
+        <Text
+          style={styles.settingHeader}>
+          Teema</Text>
+        <Picker
+          selectedValue={this.state.theme}
+          style={styles.settingsPicker}
+          onValueChange={(theme) => this.setState({theme: theme})}>
+          <Picker.Item label="Dark" value="dark"/>
+          <Picker.Item label="White" value="white"/>
+        </Picker>
       </View>
     )
   }

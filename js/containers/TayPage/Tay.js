@@ -74,7 +74,8 @@ class Tay extends Component {
     );
   }
   renderScene(route, navigator) {
-    const today = Math.abs(new Date().getDay() - 1);
+    const dayNumber = new Date().getDay() - 1;
+    const today = dayNumber === -1 ? 0 : dayNumber;
     let menu;
     if (this.props.uni === 'TayPage') {
       if (this.props.tay.fetched) {
@@ -134,27 +135,6 @@ class Tay extends Component {
         </ScrollView>
       </ScrollableTabView>
     )
-  }
-
-  renderRow(data, today) {
-    if (data.menu) {
-      console.log(today);
-      const today = Math.abs(new Date().getDay() - 1);
-      const day = days[today];
-      if (data.menu.day) {
-        console.log(day + ' exists');
-        return (
-          <RestaurantView
-            restaurant={data.restaurant}
-            menu={data.menu.day}
-            day={today}
-          />
-        )
-      } else {
-        console.log(day + ' does not exist');
-      }
-    }
-    return null;
   }
 }
 

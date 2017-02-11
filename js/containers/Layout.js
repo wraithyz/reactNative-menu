@@ -77,6 +77,7 @@ export default class Layout extends Component {
   }
 
   readSettings = (args)  => {
+    AsyncStorage.multiSet([['@Settings:university', args.university], ['@Settings:theme', args.theme], ['@Settings:lang', args.lang]]);
     this.setState({
       university: args.university,
       theme: args.theme,
