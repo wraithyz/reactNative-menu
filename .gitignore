@@ -28,6 +28,8 @@ build/
 .idea
 .gradle
 local.properties
+gradle.properties
+react-native-menu-release-key.keystore
 *.iml
 
 # node.js

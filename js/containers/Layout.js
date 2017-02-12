@@ -61,6 +61,7 @@ export default class Layout extends Component {
               onActionSelected={(pos) => this.onActionSelected(pos, navigator)}>
               <Picker
                 selectedValue={this.state.university}
+                onValueChange={(uni) => this.setState({university: uni})}
                 style={styles.menuTitle}>
                 <Picker.Item label="Tay" value="TayPage" />
                 <Picker.Item label="TTY" value="TtyPage" />
